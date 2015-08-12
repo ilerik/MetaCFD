@@ -1,0 +1,81 @@
+/*! \file buildingblocks\mediums\IdealGas.hpp
+\brief Ideal gas medium model */
+
+/*
+MetaCFD library
+Copyright (C) 2015, Ilya Eriklintsev
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+Contact information :
+e-mail : erik.lite@gmail.com
+*/
+#ifndef METACFD_BUILDINGBLOCKS_MEDIUMS_IDEALGAS_HPP_
+#define METACFD_BUILDINGBLOCKS_MEDIUMS_IDEALGAS_HPP_
+
+#include <metacfd\metacfd.hpp>
+
+//Include required concepts
+#include <metacfd\concepts\geometry\Vector.hpp>
+#include <metacfd\concepts\physics\Quantity.hpp>
+
+//Include required headers
+#include <valarray>
+
+namespace metacfd
+{
+  template< int NDims_ >
+  class IdealGas {
+    //Ideal gas parameters
+    static constexpr int ndims{ NDims_ };
+    static constexpr int num_variables{ ndims + 2 };
+    RealNumber gamma_{ 1.4 };
+    RealNumber Cv_{ 1.0 };
+    RealNumber Cp_{ gamma_ * Cv_ };
+  public:
+    //Constructor
+    template< int NDims_ >
+    constexpr IdealGas(double Gamma, double Cv) : 
+      gamma_{ Gamma }, 
+      Cv_{ Cv }, 
+      Cp_{ Gamma * Cv } 
+    {};
+
+    IdealGas(double Gamma, double Cv) :
+      gamma_{ Gamma },
+      Cv_{ Cv },
+      Cp_{ Gamma * Cv }
+    {};
+
+    //! EquationOfState 
+    constexpr double GetPressure(double density, double internal_energy) { return (gamma_ - 1.0) * density * internal_energy; };
+    
+    //! Get velocity
+    template < typename = typename std::enable_if<  ndims == 1, Vector<ndims> >::type >
+    Vector<ndims> GetVelocity(const std::valarray<RealNumber> values) { return values[1] / values[0]; };
+  };
+
+  //! Predefined medium models
+  namespace mediums {
+    //! Air
+    class Air : public IdealGas(1,1) {
+      //Constructor
+      Air() : IdealGas(1,1) {};
+    };
+  }; //namespace mediums
+
+} //namespace metacfd
+
+#endif
