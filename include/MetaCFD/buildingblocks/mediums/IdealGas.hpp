@@ -1,4 +1,4 @@
-/*! \file buildingblocks\mediums\IdealGas.hpp
+/*! \file BuildingBlocks\Mediums\IdealGas.hpp
 \brief Ideal gas medium model */
 
 /*
@@ -41,9 +41,9 @@ namespace metacfd
     //Ideal gas parameters
     static constexpr int ndims{ NDims_ };
     static constexpr int num_variables{ ndims + 2 };
-    RealNumber gamma_{ 1.4 };
-    RealNumber Cv_{ 1.0 };
-    RealNumber Cp_{ gamma_ * Cv_ };
+    double gamma_{ 1.4 };
+    double Cv_{ 1.0 };
+    double Cp_{ gamma_ * Cv_ };
   public:
     //Constructor
     template< int NDims_ >
@@ -70,7 +70,8 @@ namespace metacfd
   //! Predefined medium models
   namespace mediums {
     //! Air
-    class Air : public IdealGas(1,1) {
+    template<int _NDims>
+    class Air : public metacfd::IdealGas<_NDims>(1,1) {
       //Constructor
       Air() : IdealGas(1,1) {};
     };

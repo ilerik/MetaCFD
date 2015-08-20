@@ -73,14 +73,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\..\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\..\include;$(SolutionDir)\..\libs\eigen_3.2.5;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)\..\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\..\include;$(SolutionDir)\..\libs\eigen_3.2.5;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -104,6 +104,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../../libs/eigen_3.2.5;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,6 +139,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../../libs/eigen_3.2.5;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,6 +150,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\MetaCFD\BuildingBlocks\CFDSolvers\MOOD_Solver.hpp" />
+    <ClInclude Include="..\..\include\MetaCFD\BuildingBlocks\Mediums\IdealGas.hpp" />
+    <ClInclude Include="..\..\include\MetaCFD\Concepts\CellComplex.hpp" />
+    <ClInclude Include="..\..\include\MetaCFD\Concepts\Manifold.hpp" />
+    <ClInclude Include="..\..\include\MetaCFD\Concepts\Polytope.hpp" />
+    <ClInclude Include="..\..\include\MetaCFD\Concepts\Quantity.hpp" />
+    <ClInclude Include="..\..\include\MetaCFD\Concepts\Tensor.hpp" />
+    <ClInclude Include="..\..\include\MetaCFD\Concepts\TensorField.hpp" />
+    <ClInclude Include="..\..\include\MetaCFD\Concepts\Vector.hpp" />
+    <ClInclude Include="..\..\include\MetaCFD\Concepts\VectorQuantity.hpp" />
+    <ClInclude Include="..\..\include\MetaCFD\metacfd.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

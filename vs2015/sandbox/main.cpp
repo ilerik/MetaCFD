@@ -1,31 +1,45 @@
 #include <iostream>
 
-#include <metacfd\metacfd.hpp>
-#include <metacfd\concepts\algebra\RationalNumber.hpp>
-#include <metacfd\concepts\physics\Quantity.hpp>
-#include <metacfd\buildingblocks\mediums\IdealGas.hpp>
-#include <metacfd\buildingblocks\riemannsolvers\HLLCRiemannSolver.hpp>
-#include <metacfd\buildingblocks\methods\FiniteVolumeSolver.hpp>
+#include <MetaCFD/Concepts/Quantity.hpp>
+#include <MetaCFD/Concepts/Vector.hpp>
+#include <MetaCFD/Concepts/Manifold.hpp>
 
 using namespace metacfd;
 using namespace std;
 
 int main() {
-  Quantity < units::MassUnit > m1{ 10 };
-  Quantity < units::MassUnit > m2{ 20 };
-  Quantity < units::MassUnit > m = m1 - m2;
-  std::cout << m.val;  
+  try {
+    Quantity < units::MassUnit > m1{ 10 };
+    Quantity < units::MassUnit > m2{ 20 };
+    Quantity < units::MassUnit > m = m1 - m2;
+    std::cout << m.val;
 
-  EulerianStructuredSolver<100,
-    IdealGas<1>,
-    HLLCRiemannSolver,
-    bool,
-    bool
-  > solver{     
-    IdealGas<1>{ 1.4, 1.0 },
-    HLLCRiemannSolver {}
-  };
+    Vector<2> A{ 0.0, 0.0 };
+    Vector<2> B{ 1.0, 0.0 };
+    Vector<2> C{ 1.0, 1.0 };
+    Vector<2> D{ 0.0, 1.0 };
 
-  //Matrix<RealNumber, 2> A();  
-  return 0; 
+    Manifold Omega
+
+
+   /* MOOD_CFDSolver<100,
+      IdealGas<1>,
+      HLLCRiemannSolver,
+      bool,
+      bool
+    > solver{     
+      IdealGas<1>{ 1.4, 1.0 },
+      HLLCRiemannSolver {}
+    };*/
+
+  }
+  catch (std::exception e) {
+    std::cout << e.what() << std::endl;
+  }
+  catch (...) {
+    std::cout << "Fatal error." << std::endl;
+    std::terminate();
+  }
+  return 0;
+  
 };
