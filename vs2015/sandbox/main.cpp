@@ -19,8 +19,11 @@ int main() {
     Vector<2> C{ 1.0, 1.0 };
     Vector<2> D{ 0.0, 1.0 };
 
-    Manifold Omega
+    using K = CGAL::Epick_d<CGAL::Dynamic_dimension_tag>;
+    using Triangulation = CGAL::Triangulation<K>;
+    vector<Triangulation::Point> points{};
 
+    Manifold<2> Omega(points);
 
    /* MOOD_CFDSolver<100,
       IdealGas<1>,

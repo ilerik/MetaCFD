@@ -1,0 +1,1 @@
+g++   -std=c++11 -w -O4 -DNDEBUG   -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,--as-needed CMakeFiles/metacfd_sandbox.dir/vs2015/sandbox/main.cpp.o  -o metacfd_sandbox  -L/usr/local/lib -rdynamic -lmpfr -lgmp /usr/local/lib/libCGAL.so.11.0.1 -lboost_thread -lboost_system /usr/local/lib/libCGAL.so.11.0.1 -lboost_thread -lboost_system -Wl,-rpath,/usr/local/lib 
