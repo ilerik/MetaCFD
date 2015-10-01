@@ -1,31 +1,67 @@
 #include <iostream>
+#include <vector>
 
-#include <MetaCFD/Concepts/Quantity.hpp>
-#include <MetaCFD/Concepts/Vector.hpp>
 #include <MetaCFD/Concepts/Manifold.hpp>
+#include <MetaCFD/Concepts/OutputProvider.hpp>
+
+#include <MetaCFD/BuildingBlocks/CFDSolvers/MOOD_Solver.hpp>
 
 using namespace metacfd;
 using namespace std;
 
 int main() {
   try {
-    Quantity < units::MassUnit > m1{ 10 };
-    Quantity < units::MassUnit > m2{ 20 };
-    Quantity < units::MassUnit > m = m1 - m2;
-    std::cout << m.val;
+    //Specify geometry points and predicate
+    double eps = 0.1;
+    double alpha = 0.1;
+    double h = 0.1;
+    double lambda = 0.1;
+    double size = 3*h;
+    double dL = std::min(h / std::tan(alpha), (-eps + lambda) / 4.0);
 
-    Vector<2> A{ 0.0, 0.0 };
-    Vector<2> B{ 1.0, 0.0 };
-    Vector<2> C{ 1.0, 1.0 };
-    Vector<2> D{ 0.0, 1.0 };
+    std::vector<Manifold<2>::Point> points{ };
 
-    using K = CGAL::Epick_d<CGAL::Dynamic_dimension_tag>;
-    using Triangulation = CGAL::Triangulation<K>;
-    vector<Triangulation::Point> points{};
+    //Origin and corners
+    points.push_back(Manifold<2>::Point{ 0.0, 0.0 });
+    points.push_back(Manifold<2>::Point{ (eps + lambda) / 2.0, size });
+    points.push_back(Manifold<2>::Point{ (eps + lambda) / 2.0, -size });
+    points.push_back(Manifold<2>::Point{ -(eps + lambda) / 2.0, size });
+    points.push_back(Manifold<2>::Point{ -(eps + lambda) / 2.0, -size });
 
+    //Front
+    points.push_back(Manifold<2>::Point{ +(eps + lambda) / 2.0, h });
+    points.push_back(Manifold<2>::Point{ 0.0, h });
+    points.push_back(Manifold<2>::Point{ -(eps + lambda) / 2.0, h });
+
+    //Right side  
+    points.push_back(Manifold<2>::Point{ 0.0 + eps / 2.0, 0.0 });
+    points.push_back(Manifold<2>::Point{ 0.0 + eps / 2.0 + dL, 0.0 + h });
+    points.push_back(Manifold<2>::Point{ (eps + lambda) / 2.0, 0.0 });
+    points.push_back(Manifold<2>::Point{ (eps + lambda) / 2.0 - eps / 2.0, 0.0 });
+    points.push_back(Manifold<2>::Point{ (eps + lambda) / 2.0 - eps / 2.0 - dL, 0.0 + h });
+
+    //Left side
+    points.push_back(Manifold<2>::Point{ 0.0 - eps / 2.0, 0.0 });
+    points.push_back(Manifold<2>::Point{ 0.0 - eps / 2.0 - dL, 0.0 - h });
+    points.push_back(Manifold<2>::Point{ -(eps + lambda) / 2.0, 0.0 });
+    points.push_back(Manifold<2>::Point{ -(eps + lambda) / 2.0 + eps / 2.0, 0.0 });
+    points.push_back(Manifold<2>::Point{ -(eps + lambda) / 2.0 + eps / 2.0 + dL, 0.0 - h });
+    
+    //Construct manifold with mesh
     Manifold<2> Omega(points);
 
-   /* MOOD_CFDSolver<100,
+    { //Output initial mesh
+      OutputProvider op("initial_mesh.dat");
+      op << Omega;
+    };
+
+    { //Output refined mesh
+      OutputProvider op("refined_mesh.dat");
+      op << Omega;
+    };
+
+
+   MOOD_CFDSolver<100,
       IdealGas<1>,
       HLLCRiemannSolver,
       bool,
@@ -33,7 +69,7 @@ int main() {
     > solver{     
       IdealGas<1>{ 1.4, 1.0 },
       HLLCRiemannSolver {}
-    };*/
+    };
 
   }
   catch (std::exception e) {

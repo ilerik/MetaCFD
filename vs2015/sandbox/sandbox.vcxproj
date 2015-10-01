@@ -73,14 +73,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\..\include;$(SolutionDir)\..\libs\eigen_3.2.5;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\..\include;$(SolutionDir)\..\libs\eigen_3.2.5;C:\local\CGAL-4.7-beta1\include;C:\local\boost_1_59_0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)\..\include;$(SolutionDir)\..\libs\eigen_3.2.5;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\..\include;$(SolutionDir)\..\libs\eigen_3.2.5;C:\local\CGAL-4.7-beta1\include;C:\local\boost_1_59_0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -104,11 +104,15 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../libs/eigen_3.2.5;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:/local/Eigen/include/eigen3;../../include;C:/local/CGAL-4.7-beta1/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libboost_system-vc140-mt-gd-1_59.lib;libboost_thread-vc140-mt-gd-1_59.lib;libCGAL-vc140-mt-gd-4.7.lib;libCGAL_Core-vc140-mt-4.7.lib;libgmp-10.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\local\CGAL-4.7-beta1\lib;C:\local\CGAL-4.7-beta1\lib\Debug;C:\local\boost_1_59_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,13 +143,17 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../libs/eigen_3.2.5;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:/local/Eigen/include/eigen3;../../include;C:/local/CGAL-4.7-beta1/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>libboost_system-vc140-mt-1_59.lib;libboost_thread-vc140-mt-1_59.lib;libCGAL-vc140-mt-4.7.lib;libCGAL_Core-vc140-mt-4.7.lib;libgmp-10.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\local\CGAL-4.7-beta1\lib;C:\local\boost_1_59_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -156,6 +164,7 @@
     <ClInclude Include="..\..\include\MetaCFD\BuildingBlocks\Mediums\IdealGas.hpp" />
     <ClInclude Include="..\..\include\MetaCFD\Concepts\CellComplex.hpp" />
     <ClInclude Include="..\..\include\MetaCFD\Concepts\Manifold.hpp" />
+    <ClInclude Include="..\..\include\MetaCFD\Concepts\OutputProvider.hpp" />
     <ClInclude Include="..\..\include\MetaCFD\Concepts\Polytope.hpp" />
     <ClInclude Include="..\..\include\MetaCFD\Concepts\Quantity.hpp" />
     <ClInclude Include="..\..\include\MetaCFD\Concepts\Tensor.hpp" />

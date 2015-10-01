@@ -33,6 +33,17 @@ e-mail : erik.lite@gmail.com
 #include <cstddef>
 #include <cstdint>
 #include <functional>
+#include <fstream>
+
+#include <CGAL/Epick_d.h>
+#include <CGAL/Cartesian_d.h>
+#include <CGAL/Triangulation_data_structure.h>
+#include <CGAL/Triangulation_vertex.h>
+#include <CGAL/Triangulation_full_cell.h>
+#include <CGAL/Triangulation.h>
+#include <CGAL/Delaunay_triangulation.h>
+#include <CGAL/algorithm.h>
+#include <CGAL/Timer.h>
 
 namespace metacfd
 {

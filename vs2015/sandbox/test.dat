@@ -1,0 +1,29 @@
+TITLE = "2D Grid"
+FILETYPE = GRID
+VARIABLES = "X" "Y"
+ZONE T = "Coordinates", DATAPACKING = POINT, NODES = 11, ELEMENTS = 14, ZONETYPE = FETRIANGLE
+0 0
+0.1 0.3
+0.1 -0.3
+-0.1 0.3
+-0.1 -0.3
+0.05 0
+0.05 0.1
+0.1 0
+-0.05 0
+-0.05 -0.1
+-0.1 0
+9 1 7 
+6 10 8 
+11 10 9 
+7 6 8 
+10 3 8 
+5 10 11 
+1 6 7 
+4 7 2 
+7 8 2 
+11 9 7 
+1 10 6 
+5 3 10 
+10 1 9 
+4 11 7 

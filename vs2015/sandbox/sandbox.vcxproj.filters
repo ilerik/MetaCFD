@@ -74,5 +74,8 @@
     <ClInclude Include="..\..\include\MetaCFD\metacfd.hpp">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\MetaCFD\Concepts\OutputProvider.hpp">
+      <Filter>Заголовочные файлы\Concepts</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
