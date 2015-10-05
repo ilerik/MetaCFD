@@ -1,5 +1,5 @@
-/*! \file buildingblocks\mesh\StructuredMesh.hpp
-\brief Structured mesh class and implementation */
+/*! \file MetaCFD/Concepts/CellComplex.hpp
+\brief Concept of cell complex */
 /*
 MetaCFD library
 Copyright (C) 2015, Ilya Eriklintsev
@@ -21,22 +21,16 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 Contact information :
 e-mail : erik.lite@gmail.com
 */
-#ifndef METACFD_BUILDINGBLOCKS_MESH_STRUCTUREDMESH_HPP_
-#define METACFD_BUILDINGBLOCKS_MESH_STRUCTUREDMESH_HPP_
+#ifndef MetaCFD_Concepts_Default_hpp
+#define MetaCFD_Concepts_Default_hpp
 
-#include <metacfd\metacfd.hpp>
+#include <CGAL/Default.h>
 
-//Include required concepts
-#include <metacfd\concepts\geometry\EuclidianSpace.hpp>
+namespace metacfd {
 
-namespace metacfd
-{
-  //! Structured computational mesh
-  template<typename U>
-  class Mesh {
-  public:
-  private:
-  };
-} // namespace metacfd
+  // Using CGAL default
+  typedef CGAL::Default Default;
+
+}
 
 #endif

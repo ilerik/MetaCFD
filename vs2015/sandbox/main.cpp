@@ -1,76 +1,69 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 
-#include <MetaCFD/Concepts/Manifold.hpp>
-#include <MetaCFD/Concepts/OutputProvider.hpp>
+#include <MetaCFD/metacfd.hpp>
 
-#include <MetaCFD/BuildingBlocks/CFDSolvers/MOOD_Solver.hpp>
+//Geometric kernel
+#include <CGAL/Epick_d.h>
+
+//Exact geometric objects from CGAL kernel
+//#include <CGAL/Kernel_d/Sphere_d.h>
+//#include <CGAL/Kernel_d/Iso_box_d.h>
+
+//#include <MetaCFD/Concepts/Manifold.hpp>
+//#include <MetaCFD/Concepts/OutputProvider.hpp>
+
+#include <MetaCFD/Concepts/Default.hpp>
+#include <MetaCFD/Concepts/CellComplex.hpp>
 
 using namespace metacfd;
 using namespace std;
 
+class CSGStructure {
+public:  
+};
+
 int main() {
   try {
-    //Specify geometry points and predicate
-    double eps = 0.1;
-    double alpha = 0.1;
-    double h = 0.1;
-    double lambda = 0.1;
-    double size = 3*h;
-    double dL = std::min(h / std::tan(alpha), (-eps + lambda) / 4.0);
+    //Geometry kernel and associated entities types
+    using GeometryKernel = CGAL::Epick_d<CGAL::Dimension_tag<2>>; //! Geometry kernel traits    
+    using Point = GeometryKernel::Point_d;
+    using Vector = GeometryKernel::Vector_d;
 
-    std::vector<Manifold<2>::Point> points{ };
+    //Availible CSG primitives
+    //using Sphere = GeometryKernel::Sphere_d;
+    //using Iso_box = GeometryKernel::Iso_box_d;
 
-    //Origin and corners
-    points.push_back(Manifold<2>::Point{ 0.0, 0.0 });
-    points.push_back(Manifold<2>::Point{ (eps + lambda) / 2.0, size });
-    points.push_back(Manifold<2>::Point{ (eps + lambda) / 2.0, -size });
-    points.push_back(Manifold<2>::Point{ -(eps + lambda) / 2.0, size });
-    points.push_back(Manifold<2>::Point{ -(eps + lambda) / 2.0, -size });
+    //CGAL::Wrap::Point_d<GeometryKernel>
 
-    //Front
-    points.push_back(Manifold<2>::Point{ +(eps + lambda) / 2.0, h });
-    points.push_back(Manifold<2>::Point{ 0.0, h });
-    points.push_back(Manifold<2>::Point{ -(eps + lambda) / 2.0, h });
+    //Define geometry   
+    using CCTraits = CellComplexTraits<2>;  //Specify traits for 2D calclulation
+    //GeometryKernel::Point_d p1{ 0.0, 0.0 };
+    //GeometryKernel::Point_d p2{ 1.0, 1.0 };
+    //GeometryKernel::Point_d p3{ 1.0, 2.0 };
+    //auto iso_box = GeometryKernel::Iso_box_d::Iso_box(p1, p2);
+    //std::cout << iso_box.max;    
 
-    //Right side  
-    points.push_back(Manifold<2>::Point{ 0.0 + eps / 2.0, 0.0 });
-    points.push_back(Manifold<2>::Point{ 0.0 + eps / 2.0 + dL, 0.0 + h });
-    points.push_back(Manifold<2>::Point{ (eps + lambda) / 2.0, 0.0 });
-    points.push_back(Manifold<2>::Point{ (eps + lambda) / 2.0 - eps / 2.0, 0.0 });
-    points.push_back(Manifold<2>::Point{ (eps + lambda) / 2.0 - eps / 2.0 - dL, 0.0 + h });
+    //Create initial mesh   
+    CCTraits::Point_d p1{ 0.0, 0.0 };
+    CCTraits::Point_d p2{ 1.0, 1.0 };
+    CCTraits::Iso_box_d box{ p1, p2 };
 
-    //Left side
-    points.push_back(Manifold<2>::Point{ 0.0 - eps / 2.0, 0.0 });
-    points.push_back(Manifold<2>::Point{ 0.0 - eps / 2.0 - dL, 0.0 - h });
-    points.push_back(Manifold<2>::Point{ -(eps + lambda) / 2.0, 0.0 });
-    points.push_back(Manifold<2>::Point{ -(eps + lambda) / 2.0 + eps / 2.0, 0.0 });
-    points.push_back(Manifold<2>::Point{ -(eps + lambda) / 2.0 + eps / 2.0 + dL, 0.0 - h });
+    CellComplex<CCTraits> mesh(box);             // Instantiate mesh
+  /*  CellComplex<CCTraits>::Delaunay_triangulation t(2);
+    CellComplex<CCTraits>::Delaunay_triangulation::Finite_facet_iterator it;
+    t.tds().face;*/
+  
     
-    //Construct manifold with mesh
-    Manifold<2> Omega(points);
+    
+    //Output initial mesh
+    {
+      std::ofstream op("init.dat");
+      op << mesh;
+    }
 
-    { //Output initial mesh
-      OutputProvider op("initial_mesh.dat");
-      op << Omega;
-    };
-
-    { //Output refined mesh
-      OutputProvider op("refined_mesh.dat");
-      op << Omega;
-    };
-
-
-   MOOD_CFDSolver<100,
-      IdealGas<1>,
-      HLLCRiemannSolver,
-      bool,
-      bool
-    > solver{     
-      IdealGas<1>{ 1.4, 1.0 },
-      HLLCRiemannSolver {}
-    };
-
+    //Move borders
   }
   catch (std::exception e) {
     std::cout << e.what() << std::endl;

@@ -29,8 +29,7 @@ e-mail : erik.lite@gmail.com
 
 namespace metacfd
 {  
-
-  using OutputProvider = std::ofstream;
+  //using OutputProvider = std::ofstream;
 
   //class OutputProvider {
   //  std::ofstream ofs_; //!< Output file stream

@@ -16,23 +16,8 @@
     <Filter Include="Заголовочные файлы\Concepts">
       <UniqueIdentifier>{7050c7af-cabf-4cdf-ac95-435c37f01a7b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Заголовочные файлы\BuildingBlocks">
-      <UniqueIdentifier>{f61de0b6-55c6-417b-aae0-95dfecab776a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Заголовочные файлы\BuildingBlocks\DataStructures">
-      <UniqueIdentifier>{0e32c2e8-a692-4b44-8d09-1f3d45f1751c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Заголовочные файлы\BuildingBlocks\BoundaryConditions">
-      <UniqueIdentifier>{33161dad-254b-4556-9a06-74399965e846}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Заголовочные файлы\BuildingBlocks\IOProviders">
-      <UniqueIdentifier>{57411688-c192-4d71-bff6-17e9cd7c2913}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Заголовочные файлы\BuildingBlocks\CFDSolvers">
-      <UniqueIdentifier>{e259d9e6-34e3-4c50-81cb-d37d939cb2d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Заголовочные файлы\BuildingBlocks\Mediums">
-      <UniqueIdentifier>{f611c3b4-84a3-4d20-83d7-cddf0d3793d3}</UniqueIdentifier>
+    <Filter Include="Заголовочные файлы\Algorithms">
+      <UniqueIdentifier>{8d716a3a-c84d-42cd-b0f8-d30df6fcc9e0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -53,20 +38,11 @@
     <ClInclude Include="..\..\include\MetaCFD\Concepts\TensorField.hpp">
       <Filter>Заголовочные файлы\Concepts</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\MetaCFD\Concepts\Manifold.hpp">
-      <Filter>Заголовочные файлы\Concepts</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\MetaCFD\Concepts\Quantity.hpp">
       <Filter>Заголовочные файлы\Concepts</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\MetaCFD\Concepts\VectorQuantity.hpp">
       <Filter>Заголовочные файлы\Concepts</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\MetaCFD\BuildingBlocks\Mediums\IdealGas.hpp">
-      <Filter>Заголовочные файлы\BuildingBlocks\Mediums</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\MetaCFD\BuildingBlocks\CFDSolvers\MOOD_Solver.hpp">
-      <Filter>Заголовочные файлы\BuildingBlocks\CFDSolvers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\MetaCFD\Concepts\Vector.hpp">
       <Filter>Заголовочные файлы\Concepts</Filter>
@@ -76,6 +52,18 @@
     </ClInclude>
     <ClInclude Include="..\..\include\MetaCFD\Concepts\OutputProvider.hpp">
       <Filter>Заголовочные файлы\Concepts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\MetaCFD\Concepts\Manifold.hpp">
+      <Filter>Заголовочные файлы\Concepts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\MetaCFD\Concepts\Default.hpp">
+      <Filter>Заголовочные файлы\Concepts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\MetaCFD\Algorithms\refine_mesh.hpp">
+      <Filter>Заголовочные файлы\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\MetaCFD\Algorithms\refine_delaunay_triangulation.hpp">
+      <Filter>Заголовочные файлы\Algorithms</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

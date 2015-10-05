@@ -104,7 +104,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:/local/Eigen/include/eigen3;../../include;C:/local/CGAL-4.7-beta1/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:/local/Eigen/include/eigen3;../../include;C:/local/CGAL-4.7-beta1/include;D:/Libraries/libs/CGAL-4.7-beta2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -143,7 +143,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:/local/Eigen/include/eigen3;../../include;C:/local/CGAL-4.7-beta1/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:/local/Eigen/include/eigen3;../../include;C:/local/CGAL-4.7-beta1/include;D:/Libraries/libs/CGAL-4.7-beta2/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -160,9 +160,10 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\MetaCFD\BuildingBlocks\CFDSolvers\MOOD_Solver.hpp" />
-    <ClInclude Include="..\..\include\MetaCFD\BuildingBlocks\Mediums\IdealGas.hpp" />
+    <ClInclude Include="..\..\include\MetaCFD\Algorithms\refine_delaunay_triangulation.hpp" />
+    <ClInclude Include="..\..\include\MetaCFD\Algorithms\refine_mesh.hpp" />
     <ClInclude Include="..\..\include\MetaCFD\Concepts\CellComplex.hpp" />
+    <ClInclude Include="..\..\include\MetaCFD\Concepts\Default.hpp" />
     <ClInclude Include="..\..\include\MetaCFD\Concepts\Manifold.hpp" />
     <ClInclude Include="..\..\include\MetaCFD\Concepts\OutputProvider.hpp" />
     <ClInclude Include="..\..\include\MetaCFD\Concepts\Polytope.hpp" />
